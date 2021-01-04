@@ -51,8 +51,8 @@ afterEvaluate {
 }
 
 bintray {
-    user = env.BINTRAY_USER
-    key = env.BINTRAY_API_KEY
+    user = System.env.BINTRAY_USER
+    key = System.env.BINTRAY_API_KEY
     publications = ['gpr']
     pkg {
         repo = 'maven'
@@ -61,8 +61,8 @@ bintray {
         licenses = ['MIT']
         vcsUrl = 'https://github.com/BinaryInfinityDev/gradle-imagemagick.git'
         version {
-            name = '0.0.3'
-            vcsTag = 'v0.0.3'
+            name = '0.0.4'
+            vcsTag = 'v0.0.4'
         }
     }
 }
