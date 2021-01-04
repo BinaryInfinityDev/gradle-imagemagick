@@ -2,6 +2,7 @@ plugins {
     id 'groovy'
     id 'maven-publish'
     id 'idea'
+    id 'com.jfrog.bintray' version '1.+'
 }
 
 repositories {
@@ -36,7 +37,7 @@ publishing {
             from components.java
             groupId 'dev.binaryinfinity'
             artifactId 'gradle-imagemagick'
-            version '0.0.1'
+            version '0.0.2'
         }
     }
 }
@@ -45,6 +46,23 @@ afterEvaluate {
     if (tasks.findByName('check')) {
         test {
             dependsOn publishToMavenLocal
+        }
+    }
+}
+
+bintray {
+    user = env.BINTRAY_USER
+    key = env.BINTRAY_API_KEY
+    publications = ['gpr']
+    pkg {
+        repo = 'maven'
+        name = 'gradle-imagemagick'
+        userOrg = 'BinaryInfinity'
+        licenses = ['MIT']
+        vcsUrl = 'https://github.com/BinaryInfinityDev/gradle-imagemagick.git'
+        version {
+            name = '0.0.2'
+            vcsTag = 'v0.0.2'
         }
     }
 }
