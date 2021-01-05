@@ -57,7 +57,7 @@ bintray {
     pkg {
         repo = 'maven'
         name = 'gradle-imagemagick'
-        userOrg = 'BinaryInfinity'
+        userOrg = 'binaryinfinity'
         licenses = ['MIT']
         vcsUrl = 'https://github.com/BinaryInfinityDev/gradle-imagemagick.git'
         version {
