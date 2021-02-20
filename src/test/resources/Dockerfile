@@ -3,17 +3,17 @@ FROM gradle:jdk8
 ENV TZ=America/New_York
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN apt-get update
-RUN apt-get upgrade -y
-RUN apt-get install -y curl webp
-RUN apt-get install -y build-essential
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends build-essential=12.8ubuntu1.1 webp=0.6.1-2 \
+  && rm -rf /var/lib/apt/lists/*
 
-RUN curl -sfLO https://download.imagemagick.org/ImageMagick/download/ImageMagick.tar.gz \
-  && tar -xzf ImageMagick.tar.gz \
-  && cd ImageMagick* \
+WORKDIR /imagemagick
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+RUN curl -sfL https://download.imagemagick.org/ImageMagick/download/ImageMagick.tar.gz | tar -xvz --strip-components=1 \
   && ./configure --prefix /usr \
   && make install \
-  && ldconfig /usr/lib \
-  && cd .. \
-  && rm -rf  ImageMagick*
+  && rm -r ./*
+WORKDIR /
+RUN rm -rf /imagemagick
 
+RUN ldconfig /usr/lib
