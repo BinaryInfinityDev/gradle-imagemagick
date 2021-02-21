@@ -6,6 +6,8 @@ on:
       - main
     paths:
       - '/src/test/resources/Dockerfile'
+    tags:
+      - docker/v*
   pull_request:
     paths:
       - '/src/test/resources/Dockerfile'
