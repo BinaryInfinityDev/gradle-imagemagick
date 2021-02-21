@@ -3,7 +3,7 @@ name: Build Docker Image
 on:
   push:
     branches:
-      - $default-branch
+      - main
     paths:
       - '/src/test/resources/Dockerfile'
   pull_request:
